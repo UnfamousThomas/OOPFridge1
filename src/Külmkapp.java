@@ -5,26 +5,45 @@ import java.util.List;
 import java.util.Random;
 
 public class Külmkapp {
+    /**
+     * List asjadest mis on külmikus
+     */
     private List<Ese> asjadKülmikus;
+    /**
+     * Millal viimati külmkapi sisu muudeti
+     */
     private Date viimatiMuudetud;
+    /**
+     * Kui suur on külmkapp (max)
+     */
     private final int külmkappiSuurus;
     private int hetkelAsjuKülmikus;
 
-    public Külmkapp(Date viimatiSisestatud, int külmkappiSuurus) {
-        this.viimatiMuudetud = viimatiSisestatud;
+    /**
+     * Konstrueerib külmmkapi.
+     * @param külmkappiSuurus Kui suur on külmkapp
+     */
+    public Külmkapp(int külmkappiSuurus) {
+        this.viimatiMuudetud = Date.from(Instant.now());
         this.asjadKülmikus = new ArrayList<>();
         this.külmkappiSuurus = külmkappiSuurus;
         this.hetkelAsjuKülmikus = 0;
     }
 
-
+    /**
+     * Tühjendab külmkapi.
+     */
     public void tühjendaKülmkapp() {
         asjadKülmikus.clear();
+        this.hetkelAsjuKülmikus = 0;
+        setViimatiMuudetudNow();
     }
 
+    /**
+     * Lisab eseme külmkappi
+     * @param ese Ese mis lisada
+     */
     public void lisaKülmkappi(Ese ese) {
-        // 10 + 0+10
-        // 10 <= 10
         if(külmkappiSuurus < asjadKülmikus.size() + ese.getKogus()) {
             System.out.println("Ei mahtunud külmikusse. Söö ära.");
             return;
@@ -34,21 +53,38 @@ public class Külmkapp {
         asjadKülmikus.add(ese);
     }
 
+    /**
+     * Eemdlab eseme külmkapist kasutades indeksit
+     * @param indeks Listi indeks
+     */
     private void eemaldaKülmkappist(int indeks) {
-        asjadKülmikus.remove(indeks);
-        setViimatiMuudetudNow();
+        Ese ese = asjadKülmikus.remove(indeks);
+        eemaldaKülmkappist(ese);
 
     }
 
+    /**
+     * Paneb viimatimuudetud aja praeguse peale.
+     */
     private void setViimatiMuudetudNow() {
         this.viimatiMuudetud = Date.from(Instant.now());
     }
 
+    /**
+     * Eemaldab eseme külmkapist
+     * @param ese Ese mis eemaldada
+     */
     private void eemaldaKülmkappist(Ese ese) {
         asjadKülmikus.remove(ese);
+        this.hetkelAsjuKülmikus = this.hetkelAsjuKülmikus - ese.getKogus();
         setViimatiMuudetudNow();
     }
 
+    /**
+     * Uuendab eseme kogust ja külmkappi hulka.
+     * @param esemeNimetus Mille kogust muuta
+     * @param uusKogus Kogus milleks ese panna
+     */
     public void uuendaEsemeKogust(String esemeNimetus, int uusKogus) {
         for (Ese eseKülmikus : asjadKülmikus) {
             if(esemeNimetus.equals(eseKülmikus.getEsemeNimetus())) {
@@ -69,11 +105,19 @@ public class Külmkapp {
         System.out.println("Sellist eset ei ole külmkapis");
     }
 
+    /**
+     * Kustutab eseme külmkappi listist
+     * @param ese Mis kustutada
+     */
     public void kustutaEse(Ese ese) {
         asjadKülmikus.remove(ese);
         setViimatiMuudetudNow();
     }
 
+    /**
+     * Tagastab suvalise eseme ning eemaldab selle.
+     * @return Suvaline ese esemtest külmkapist.
+     */
     public Ese võtaSuvalineEse() {
         Random random = new Random();
         if(asjadKülmikus.isEmpty()) {
