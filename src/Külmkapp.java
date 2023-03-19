@@ -126,7 +126,6 @@ public class Külmkapp {
         }
 
         int suurus = random.nextInt(0, asjadKülmikus.size());
-        //todo eemalda ka
         Ese ese = asjadKülmikus.get(suurus);
         int esemeHulk = ese.getKogus();
         this.hetkelAsjuKülmikus = this.hetkelAsjuKülmikus - esemeHulk;
