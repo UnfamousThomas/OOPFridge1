@@ -16,17 +16,17 @@ public class Külmkapp {
     /**
      * Kui suur on külmkapp (max)
      */
-    private final int külmkappiSuurus;
+    private final int külmkapiSuurus;
     private int hetkelAsjuKülmikus;
 
     /**
      * Konstrueerib külmmkapi.
-     * @param külmkappiSuurus Kui suur on külmkapp
+     * @param külmkapiSuurus Kui suur on külmkapp
      */
-    public Külmkapp(int külmkappiSuurus) {
+    public Külmkapp(int külmkapiSuurus) {
         this.viimatiMuudetud = Date.from(Instant.now());
         this.asjadKülmikus = new ArrayList<>();
-        this.külmkappiSuurus = külmkappiSuurus;
+        this.külmkapiSuurus = külmkapiSuurus;
         this.hetkelAsjuKülmikus = 0;
     }
 
@@ -44,13 +44,14 @@ public class Külmkapp {
      * @param ese Ese mis lisada
      */
     public void lisaKülmkappi(Ese ese) {
-        if(külmkappiSuurus < asjadKülmikus.size() + ese.getKogus()) {
+        if(külmkapiSuurus < asjadKülmikus.size() + ese.getKogus()) {
             System.out.println("Ei mahtunud külmikusse. Söö ära.");
             return;
         }
 
         this.hetkelAsjuKülmikus = this.hetkelAsjuKülmikus + ese.getKogus();
         asjadKülmikus.add(ese);
+        setViimatiMuudetudNow();
     }
 
     /**
@@ -58,7 +59,7 @@ public class Külmkapp {
      * @param indeks Listi indeks
      */
     private void eemaldaKülmkappist(int indeks) {
-        Ese ese = asjadKülmikus.remove(indeks);
+        Ese ese = asjadKülmikus.get(indeks);
         eemaldaKülmkappist(ese);
 
     }
@@ -83,18 +84,18 @@ public class Külmkapp {
     /**
      * Uuendab eseme kogust ja külmkappi hulka.
      * @param esemeNimetus Mille kogust muuta
-     * @param uusKogus Kogus milleks ese panna
+     * @param uusKogus Eseme uus kogus
      */
     public void uuendaEsemeKogust(String esemeNimetus, int uusKogus) {
         for (Ese eseKülmikus : asjadKülmikus) {
             if(esemeNimetus.equals(eseKülmikus.getEsemeNimetus())) {
                 int ilmaKoguseta = this.hetkelAsjuKülmikus - eseKülmikus.getKogus();
                 int uueKogusega = ilmaKoguseta + uusKogus;
-                if(külmkappiSuurus < uueKogusega) {
+                if(külmkapiSuurus < uueKogusega) {
                     System.out.println("Uus kogus ei mahtunud külmikusse. Söö ära. (Ei muutnud andmeid)");
                     return;
                 }
-                this.hetkelAsjuKülmikus = this.hetkelAsjuKülmikus - eseKülmikus.getKogus();
+                this.hetkelAsjuKülmikus = this.hetkelAsjuKülmikus - eseKülmikus.getKogus() + uusKogus;
                 eseKülmikus.setKogus(uusKogus);
                 if(uusKogus == 0) kustutaEse(eseKülmikus);
                 setViimatiMuudetudNow();
@@ -119,11 +120,11 @@ public class Külmkapp {
      * @return Suvaline ese esemtest külmkapist.
      */
     public Ese võtaSuvalineEse() {
-        Random random = new Random();
         if(asjadKülmikus.isEmpty()) {
             System.out.println("Külmkapp on tühi!");
             return null;
         }
+        Random random = new Random();
 
         int suurus = random.nextInt(0, asjadKülmikus.size());
         Ese ese = asjadKülmikus.get(suurus);
