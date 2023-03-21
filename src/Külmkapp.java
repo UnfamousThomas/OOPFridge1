@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +32,23 @@ public class Külmkapp {
         this.asjadKülmikus = new ArrayList<>();
         this.külmkapiSuurus = külmkapiSuurus;
         this.hetkelAsjuKülmikus = 0;
+    }
+
+    public Külmkapp(int külmkapiSuurus, List<Ese> esemed, Date viimatiMuudetud) {
+        this.külmkapiSuurus = külmkapiSuurus;
+        this.viimatiMuudetud = viimatiMuudetud;
+        int koguEsemeid = 0;
+        for (Ese ese : esemed) {
+            koguEsemeid = koguEsemeid + ese.getKogus();
+        }
+        if(koguEsemeid > külmkapiSuurus) {
+            throw new RuntimeException("Esemeid on rohkem kui külmkapi suurus");
+        }
+
+        this.asjadKülmikus = esemed;
+
+        this.hetkelAsjuKülmikus = koguEsemeid;
+
     }
 
     /**
@@ -79,6 +100,14 @@ public class Külmkapp {
         asjadKülmikus.remove(ese);
         this.hetkelAsjuKülmikus = this.hetkelAsjuKülmikus - ese.getKogus();
         setViimatiMuudetudNow();
+    }
+
+    public Ese leiaEseNimetusega(String nimetus) {
+        for (Ese ese : asjadKülmikus) {
+            if(ese.getEsemeNimetus().equals(nimetus)) return ese;
+        }
+
+        return null;
     }
 
     /**
@@ -133,5 +162,16 @@ public class Külmkapp {
         setViimatiMuudetudNow();
         kustutaEse(ese);
         return ese;
+    }
+
+    public void salvestaKülmkapp(String failiNimi) throws IOException {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        PrintWriter pw = new PrintWriter(failiNimi);
+        pw.println("K " + külmkapiSuurus + " " + sdf.format(viimatiMuudetud));
+        for (Ese ese : asjadKülmikus) {
+            pw.println(ese.getEsemeNimetus() + " " + ese.getKogus() + " " + sdf.format(ese.getLähebHalvaks()));
+        }
+
+        pw.close();
     }
 }
