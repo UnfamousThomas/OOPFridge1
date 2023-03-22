@@ -15,12 +15,12 @@ public class Main {
     public static void main(String[] args)  {
         Külmkapp külmkapp;
         System.out.println("Palun sisesta fail kust lugeda külmkapp.");
-        Scanner scanner = new Scanner(System.in);
-        String failiNimi = scanner.nextLine();
+        Scanner tekstiScanner = new Scanner(System.in);
+        String failiNimi = tekstiScanner.nextLine();
         try {
             külmkapp = loeKülmkapp(failiNimi);
 
-            teeMidagi(külmkapp, failiNimi);
+            teeMidagi(külmkapp, failiNimi, tekstiScanner);
         } catch (ParseException parseException) {
             parseException.printStackTrace();
             System.exit(1);
@@ -30,10 +30,9 @@ public class Main {
 
     }
 
-    private static void teeMidagi(Külmkapp külmkapp, String failiNimi) {
-        System.out.println("Mida soovid teha? (1 - lisa külmkappi ese, 2 - võta suvaline ese külmkapist, 3 - eemalda ese külmkapist, 4- salvesta külmkapp ja lõpeta töö");
-        Scanner scanner = new Scanner(System.in);
-        int midagi = scanner.nextInt();
+    private static void teeMidagi(Külmkapp külmkapp, String failiNimi, Scanner tekstiScanner) {
+        System.out.println("Mida soovid teha? (1 - lisa külmkappi ese, 2 - võta suvaline ese külmkapist, 3 - eemalda ese külmkapist, 4- salvesta külmkapp ja lõpeta töö, 5 - näita külmkapi esemeid");
+        int midagi = Integer.parseInt(tekstiScanner.nextLine());
 
         if(midagi == 4) {
             try {
@@ -45,6 +44,10 @@ public class Main {
             }
         }
 
+        if(midagi == 5) {
+            külmkapp.näitaKülmkappi();
+        }
+
         if(midagi == 2) {
             Ese ese = külmkapp.võtaSuvalineEse();
             if(ese != null) {
@@ -53,33 +56,36 @@ public class Main {
         }
 
         if(midagi == 3) {
+            if(külmkapp.kasOnTühi()) {
+                System.out.println("Ei saa eemaldada, külmkapp on tühi.");
+                teeMidagi(külmkapp, failiNimi, tekstiScanner);
+            }
             System.out.println("Mis on eseme nimi?");
-            String nimi = scanner.nextLine();
+            String nimi = tekstiScanner.nextLine();
             Ese ese = külmkapp.leiaEseNimetusega(nimi);
             külmkapp.kustutaEse(ese);
+            //todo better scanner
         }
 
         if(midagi == 1) {
-            Scanner scanner1 = new Scanner(System.in);
             System.out.println("Mis on uue eseme nimi?");
-            String nimi = scanner1.nextLine();
-            System.out.println(nimi);
+            String nimi = tekstiScanner.nextLine();
             System.out.println("Mitu ühikut soovid lisada?");
-            int kogus = Integer.parseInt(scanner1.nextLine());
+            int kogus = Integer.parseInt(tekstiScanner.nextLine());
             System.out.println("Kuupäev pahaks (MM/dd/yyyy)");
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
             try {
-                Date date = sdf.parse(scanner1.nextLine());
+                Date date = sdf.parse(tekstiScanner.nextLine());
                 Ese ese = new Ese(nimi, date, kogus);
                 külmkapp.lisaKülmkappi(ese);
             } catch (ParseException e) {
                 System.out.println("Midagi läks kuupäevaga valesti! Proovi uuesti.");
-                teeMidagi(külmkapp, failiNimi);
+                teeMidagi(külmkapp, failiNimi, tekstiScanner);
             }
 
         }
 
-        teeMidagi(külmkapp, failiNimi);
+        teeMidagi(külmkapp, failiNimi, tekstiScanner);
     }
 
     private static void prindiEse(Ese ese) {
@@ -117,7 +123,7 @@ public class Main {
         } catch (IOException e){
             System.out.println("Loon uue külmkapi.");
             System.out.println("Sisesta uue külmkapi suurus");
-            int suurus = scanner.nextInt();
+            int suurus = Integer.parseInt(scanner.nextLine());
             loodudKülmik = new Külmkapp(suurus);
         }
 

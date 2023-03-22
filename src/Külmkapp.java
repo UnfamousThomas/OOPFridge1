@@ -174,4 +174,17 @@ public class Külmkapp {
 
         pw.close();
     }
+
+    public void näitaKülmkappi() {
+        System.out.println("Näitan külmkappi (suurusega " + külmkapiSuurus + ")");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+
+        for (Ese ese : asjadKülmikus) {
+            System.out.println(ese.getEsemeNimetus() + " - " + ese.getKogus() + " - " + sdf.format(ese.getLähebHalvaks()));
+        }
+    }
+
+    public boolean kasOnTühi() {
+        return hetkelAsjuKülmikus <= 0;
+    }
 }
