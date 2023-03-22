@@ -31,7 +31,13 @@ public class Main {
     }
 
     private static void teeMidagi(Külmkapp külmkapp, String failiNimi, Scanner tekstiScanner) {
-        System.out.println("Mida soovid teha? (1 - lisa külmkappi ese, 2 - võta suvaline ese külmkapist, 3 - eemalda ese külmkapist, 4- salvesta külmkapp ja lõpeta töö, 5 - näita külmkapi esemeid");
+        System.out.println("Mida soovid teha?");
+        System.out.println("1 - lisa külmkappi ese");
+        System.out.println("2 - võta suvaline ese külmkapist");
+        System.out.println("3 - eemalda ese külmkapist");
+        System.out.println("4- salvesta külmkapp ja lõpeta töö");
+        System.out.println("5 - näita külmkapi esemeid");
+        System.out.println("6 - Eemalda kõik halvaks läinud esemed");
         int midagi = Integer.parseInt(tekstiScanner.nextLine());
 
         if(midagi == 4) {
@@ -42,6 +48,10 @@ public class Main {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        if(midagi == 6) {
+            külmkapp.eemaldaKülmkapistHalvaksLäinud();
         }
 
         if(midagi == 5) {
@@ -64,7 +74,6 @@ public class Main {
             String nimi = tekstiScanner.nextLine();
             Ese ese = külmkapp.leiaEseNimetusega(nimi);
             külmkapp.kustutaEse(ese);
-            //todo better scanner
         }
 
         if(midagi == 1) {

@@ -180,11 +180,26 @@ public class Külmkapp {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
         for (Ese ese : asjadKülmikus) {
-            System.out.println(ese.getEsemeNimetus() + " - " + ese.getKogus() + " - " + sdf.format(ese.getLähebHalvaks()));
+            if(ese.kasOnHalvaksLäinud()) {
+                System.out.println(ese.getEsemeNimetus() + " - " + ese.getKogus() + " - " + sdf.format(ese.getLähebHalvaks()));
+            } else {
+                System.out.println(ese.getEsemeNimetus() + " - " + ese.getKogus() + " - Läks halvaks: " + sdf.format(ese.getLähebHalvaks()));
+
+            }
         }
     }
 
     public boolean kasOnTühi() {
         return hetkelAsjuKülmikus <= 0;
+    }
+
+    public void eemaldaKülmkapistHalvaksLäinud() {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        for (Ese ese : asjadKülmikus) {
+            if(ese.kasOnHalvaksLäinud()) {
+                System.out.println("Eemaldasin: " + ese.getEsemeNimetus() + " - " + ese.getKogus() + " - " + sdf.format(ese.getLähebHalvaks()));
+                eemaldaKülmkappist(ese);
+            }
+        }
     }
 }
