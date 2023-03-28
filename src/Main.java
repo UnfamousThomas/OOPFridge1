@@ -32,12 +32,12 @@ public class Main {
 
     private static void teeMidagi(Külmkapp külmkapp, String failiNimi, Scanner tekstiScanner) {
         System.out.println("Mida soovid teha?");
-        System.out.println("1 - lisa külmkappi ese");
-        System.out.println("2 - võta suvaline ese külmkapist");
-        System.out.println("3 - eemalda ese külmkapist");
-        System.out.println("4- salvesta külmkapp ja lõpeta töö");
-        System.out.println("5 - näita külmkapi esemeid");
-        System.out.println("6 - Eemalda kõik halvaks läinud esemed");
+        System.out.println("1 - Näita külmkapi esemeid");
+        System.out.println("2 - Lisa külmkappi ese");
+        System.out.println("3 - Eemalda ese külmkapist");
+        System.out.println("4 - Eemalda kõik halvaks läinud esemed");
+        System.out.println("5 - Võta suvaline ese külmkapist");
+        System.out.println("6 - Salvesta külmkapp ja lõpeta töö");
         int midagi = Integer.parseInt(tekstiScanner.nextLine());
 
         if(midagi == 6) {

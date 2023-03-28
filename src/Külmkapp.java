@@ -164,6 +164,11 @@ public class Külmkapp {
         return ese;
     }
 
+    /**
+     *
+     * @param failiNimi
+     * @throws IOException
+     */
     public void salvestaKülmkapp(String failiNimi) throws IOException {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         PrintWriter pw = new PrintWriter(failiNimi);
@@ -180,7 +185,7 @@ public class Külmkapp {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
         for (Ese ese : asjadKülmikus) {
-            if(ese.kasOnHalvaksLäinud()) {
+            if(!ese.kasOnHalvaksLäinud()) {
                 System.out.println(ese.getEsemeNimetus() + " - " + ese.getKogus() + " - " + sdf.format(ese.getLähebHalvaks()));
             } else {
                 System.out.println(ese.getEsemeNimetus() + " - " + ese.getKogus() + " - Läks halvaks: " + sdf.format(ese.getLähebHalvaks()));
