@@ -40,7 +40,7 @@ public class Main {
         System.out.println("6 - Eemalda kõik halvaks läinud esemed");
         int midagi = Integer.parseInt(tekstiScanner.nextLine());
 
-        if(midagi == 4) {
+        if(midagi == 6) {
             try {
                 külmkapp.salvestaKülmkapp(failiNimi);
 
@@ -50,15 +50,15 @@ public class Main {
             }
         }
 
-        if(midagi == 6) {
+        if(midagi == 4) {
             külmkapp.eemaldaKülmkapistHalvaksLäinud();
         }
 
-        if(midagi == 5) {
+        if(midagi == 1) {
             külmkapp.näitaKülmkappi();
         }
 
-        if(midagi == 2) {
+        if(midagi == 5) {
             Ese ese = külmkapp.võtaSuvalineEse();
             if(ese != null) {
                 prindiEse(ese);
@@ -76,7 +76,7 @@ public class Main {
             külmkapp.kustutaEse(ese);
         }
 
-        if(midagi == 1) {
+        if(midagi == 2) {
             System.out.println("Mis on uue eseme nimi?");
             String nimi = tekstiScanner.nextLine();
             System.out.println("Mitu ühikut soovid lisada?");
