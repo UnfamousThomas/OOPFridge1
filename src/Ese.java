@@ -27,7 +27,7 @@ public class Ese {
     }
 
     /**
-     * Paneb esemele uue nimetus.
+     * Paneb esemele uue nimetuse.
      * @param esemeNimetus Uus esemenimetus.
      */
     public void setEsemeNimetus(String esemeNimetus) {
@@ -35,7 +35,7 @@ public class Ese {
     }
 
     /**
-     * Tagastab millal ese halvaks läheb
+     * Tagastab, millal ese halvaks läheb
      *
      * @return Date millal halvaks läheb
      */
@@ -45,7 +45,7 @@ public class Ese {
 
     /**
      *
-     * @return Mitu on eset
+     * @return Eseme kogus
      */
     public int getKogus() {
         return kogus;

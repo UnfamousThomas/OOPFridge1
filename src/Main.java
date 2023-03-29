@@ -17,7 +17,7 @@ public class Main {
         String failiNimi = tekstiScanner.nextLine();
         try {
             külmkapp = loeKülmkapp(failiNimi);
-            interactiKülmkappigaRekursiivne(külmkapp, failiNimi, tekstiScanner);
+            interactiKülmkapigaRekursiivne(külmkapp, failiNimi, tekstiScanner);
         } catch (ParseException parseException) {
             parseException.printStackTrace();
             System.exit(1);
@@ -29,7 +29,7 @@ public class Main {
      * @param failiNimi     Failinimi kust külmkapp leiti
      * @param tekstiScanner Avatud scanner millega me loeme konsooli
      */
-    private static void interactiKülmkappigaRekursiivne(Külmkapp külmkapp, String failiNimi, Scanner tekstiScanner) {
+    private static void interactiKülmkapigaRekursiivne(Külmkapp külmkapp, String failiNimi, Scanner tekstiScanner) {
         System.out.println("Mida soovid teha?");
         System.out.println("1 - Näita külmkapi esemeid");
         System.out.println("2 - Lisa külmkappi ese");
@@ -55,7 +55,7 @@ public class Main {
                 külmkapp.lisaKülmkappi(ese);
             } catch (ParseException e) {
                 System.out.println("Midagi läks kuupäevaga valesti! Proovi uuesti.");
-                interactiKülmkappigaRekursiivne(külmkapp, failiNimi, tekstiScanner);
+                interactiKülmkapigaRekursiivne(külmkapp, failiNimi, tekstiScanner);
             }
 
         }
@@ -63,7 +63,7 @@ public class Main {
         if (midagi == 3) {
             if (külmkapp.kasOnTühi()) {
                 System.out.println("Ei saa eemaldada, külmkapp on tühi.");
-                interactiKülmkappigaRekursiivne(külmkapp, failiNimi, tekstiScanner);
+                interactiKülmkapigaRekursiivne(külmkapp, failiNimi, tekstiScanner);
             }
             System.out.println("Mis on eseme nimi?");
             String nimi = tekstiScanner.nextLine();
@@ -95,7 +95,7 @@ public class Main {
         }
 
 
-        interactiKülmkappigaRekursiivne(külmkapp, failiNimi, tekstiScanner);
+        interactiKülmkapigaRekursiivne(külmkapp, failiNimi, tekstiScanner);
     }
 
     /**
