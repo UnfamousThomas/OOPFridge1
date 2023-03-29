@@ -22,6 +22,7 @@ public class Külmkapp {
      */
     private final int külmkapiSuurus;
     private int hetkelAsjuKülmikus;
+    private static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
     /**
      * Konstrueerib külmmkapi.
@@ -170,7 +171,6 @@ public class Külmkapp {
      * @throws IOException
      */
     public void salvestaKülmkapp(String failiNimi) throws IOException {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         PrintWriter pw = new PrintWriter(failiNimi);
         pw.println("K " + külmkapiSuurus + " " + sdf.format(viimatiMuudetud));
         for (Ese ese : asjadKülmikus) {
@@ -182,7 +182,6 @@ public class Külmkapp {
 
     public void näitaKülmkappi() {
         System.out.println("Näitan külmkappi (suurusega " + külmkapiSuurus + ")");
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
         for (Ese ese : asjadKülmikus) {
             if(!ese.kasOnHalvaksLäinud()) {
@@ -199,7 +198,6 @@ public class Külmkapp {
     }
 
     public void eemaldaKülmkapistHalvaksLäinud() {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         for (Ese ese : asjadKülmikus) {
             if(ese.kasOnHalvaksLäinud()) {
                 System.out.println("Eemaldasin: " + ese.getEsemeNimetus() + " - " + ese.getKogus() + " - " + sdf.format(ese.getLähebHalvaks()));
