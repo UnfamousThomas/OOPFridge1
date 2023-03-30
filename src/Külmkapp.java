@@ -34,8 +34,13 @@ public class Külmkapp {
         this.hetkelAsjuKülmikus = 0;
     }
 
+    /**
+     * Loob külmkapi vastavalt parameetritele
+     * @param külmkapiSuurus
+     * @param esemed külmkapis olevad esemed
+     * @param viimatiMuudetud
+     */
     public Külmkapp(int külmkapiSuurus, List<Ese> esemed, Date viimatiMuudetud) {
-        //loob külmkapi etteantud andmete põhjal
         this.külmkapiSuurus = külmkapiSuurus;
         this.viimatiMuudetud = viimatiMuudetud;
         int koguEsemeid = 0;
@@ -77,7 +82,7 @@ public class Külmkapp {
     }
 
     /**
-     * Eemdlab eseme külmkapist kasutades indeksit
+     * Eemaldab eseme külmkapist kasutades indeksit
      * @param indeks Listi indeks
      */
     private void eemaldaKülmkapist(int indeks) {
@@ -98,14 +103,12 @@ public class Külmkapp {
      * @param ese Ese mis eemaldada
      */
     private void eemaldaKülmkapist(Ese ese) {
-        //eemaldab eseme külmikust ja uuendab viimati muutmise aega
         asjadKülmikus.remove(ese);
         this.hetkelAsjuKülmikus = this.hetkelAsjuKülmikus - ese.getKogus();
         setViimatiMuudetudNow();
     }
 
     public Ese leiaEseNimetusega(String nimetus) {
-        //otsib etteantud eset
         for (Ese ese : asjadKülmikus) {
             if(ese.getEsemeNimetus().equals(nimetus)) return ese;
         }
@@ -114,7 +117,7 @@ public class Külmkapp {
     }
 
     /**
-     * Uuendab eseme kogust ja külmkappi hulka.
+     * Uuendab eseme kogust ja külmkapis olevate esemete hulka.
      * @param esemeNimetus Mille kogust muuta
      * @param uusKogus Eseme uus kogus
      */
@@ -152,7 +155,6 @@ public class Külmkapp {
      * @return Suvaline ese esemtest külmkapist.
      */
     public Ese võtaSuvalineEse() {
-        //kui külmkapis on midagi, siis tagastab suvalise eseme neist
         if(asjadKülmikus.isEmpty()) {
             System.out.println("Külmkapp on tühi!");
             return null;
@@ -169,12 +171,11 @@ public class Külmkapp {
     }
 
     /**
-     *
+     * Salvestab külmkapi faili
      * @param failiNimi
      * @throws IOException
      */
     public void salvestaKülmkapp(String failiNimi) throws IOException {
-        //salvestab külmkapi seisu faili
         PrintWriter pw = new PrintWriter(failiNimi);
         pw.println("K " + külmkapiSuurus + " " + sdf.format(viimatiMuudetud));
         for (Ese ese : asjadKülmikus) {
@@ -184,8 +185,10 @@ public class Külmkapp {
         pw.close();
     }
 
+    /**
+     * Näitab külmkapi sisu ja kui midagi on halvaks läinud, siis ka seda
+     */
     public void näitaKülmkappi() {
-        //näitab külmkapi sisu ja kui midagi on halvaks läinud, siis ka seda
         System.out.println("Näitan külmkappi (suurusega " + külmkapiSuurus + ")");
 
         for (Ese ese : asjadKülmikus) {
@@ -200,12 +203,13 @@ public class Külmkapp {
 
 
     public boolean kasOnTühi() {
-        //näitab, kas külmkapp on tühi
         return hetkelAsjuKülmikus <= 0;
     }
 
+    /**
+     * Eemaldab halvaks läinud esemed
+     */
     public void eemaldaKülmkapistHalvaksLäinud() {
-        //eemdaldab halvaks läinud esemed
         for (Ese ese : asjadKülmikus) {
             if(ese.kasOnHalvaksLäinud()) {
                 System.out.println("Eemaldasin: " + ese.getEsemeNimetus() + " - " + ese.getKogus() + " - " + sdf.format(ese.getLähebHalvaks()));

@@ -93,8 +93,8 @@ public class Ese {
     }
 
     /**
-     * Kontrollib kas kaks eset on võrdsed
-     * @param obj Ese millega this eset võrrelda.
+     * Kontrollib, kas kaks eset on võrdsed
+     * @param obj Ese, millega this eset võrrelda.
      * @return Kas ese on võrdne
      */
     @Override

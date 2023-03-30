@@ -26,9 +26,10 @@ public class Main {
     }
 
     /**
-     * @param külmkapp      Külmkapp millega tegeleme
-     * @param failiNimi     Failinimi kust külmkapp leiti
-     * @param tekstiScanner Avatud scanner millega me loeme konsooli
+     * Suhtleb kasutajaga ja käitub vastavalt sisendile
+     * @param külmkapp      Külmkapp, millega tegeleme
+     * @param failiNimi     Failinimi, kust külmkapp leiti
+     * @param tekstiScanner Avatud scanner, millega me loeme konsooli
      */
     private static void interactiKülmkapigaRekursiivne(Külmkapp külmkapp, String failiNimi, Scanner tekstiScanner) {
         System.out.println("Mida soovid teha?");
@@ -38,13 +39,13 @@ public class Main {
         System.out.println("4 - Eemalda kõik halvaks läinud esemed");
         System.out.println("5 - Võta suvaline ese külmkapist");
         System.out.println("6 - Salvesta külmkapp ja lõpeta töö");
-        int midagi = Integer.parseInt(tekstiScanner.nextLine());
+        int sisend = Integer.parseInt(tekstiScanner.nextLine());
 
-        if (midagi == 1) {
+        if (sisend == 1) {
             külmkapp.näitaKülmkappi();
         }
 
-        if (midagi == 2) {
+        if (sisend == 2) {
             System.out.println("Mis on uue eseme nimi?");
             String nimi = tekstiScanner.nextLine();
             System.out.println("Mitu ühikut soovid lisada?");
@@ -61,7 +62,7 @@ public class Main {
 
         }
 
-        if (midagi == 3) {
+        if (sisend == 3) {
             if (külmkapp.kasOnTühi()) {
                 System.out.println("Ei saa eemaldada, külmkapp on tühi.");
                 interactiKülmkapigaRekursiivne(külmkapp, failiNimi, tekstiScanner);
@@ -72,12 +73,12 @@ public class Main {
             külmkapp.kustutaEse(ese);
         }
 
-        if (midagi == 4) {
+        if (sisend == 4) {
             külmkapp.eemaldaKülmkapistHalvaksLäinud();
         }
 
 
-        if (midagi == 5) {
+        if (sisend == 5) {
             Ese ese = külmkapp.võtaSuvalineEse();
             if (ese != null) {
                 prindiEse(ese);
@@ -85,7 +86,7 @@ public class Main {
         }
 
 
-        if (midagi == 6) {
+        if (sisend == 6) {
             try {
                 külmkapp.salvestaKülmkapp(failiNimi);
 
