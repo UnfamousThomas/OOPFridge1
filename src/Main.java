@@ -12,7 +12,8 @@ public class Main {
     static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     public static void main(String[] args) {
         Külmkapp külmkapp;
-        System.out.println("Palun sisesta fail kust lugeda külmkapp.");
+        System.out.println("Tere tulemast külmkapi haldamise programmi kasutama!");
+        System.out.println("Palun sisesta fail, kust lugeda külmkapp.");
         Scanner tekstiScanner = new Scanner(System.in);
         String failiNimi = tekstiScanner.nextLine();
         try {
@@ -117,7 +118,7 @@ public class Main {
      * @throws ParseException Probleem faili formaadiga
      */
 
-    private static Külmkapp loeKülmkapp(String failiNimi) throws ParseException {
+        private static Külmkapp loeKülmkapp(String failiNimi) throws ParseException {
         Scanner scanner = new Scanner(System.in);
         Külmkapp loodudKülmik;
         List<Ese> esemed = new ArrayList<>();

@@ -198,6 +198,7 @@ public class Külmkapp {
         }
     }
 
+
     public boolean kasOnTühi() {
         //näitab, kas külmkapp on tühi
         return hetkelAsjuKülmikus <= 0;

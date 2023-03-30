@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Ese {
@@ -5,6 +6,8 @@ public class Ese {
     private String esemeNimetus;
     private Date lähebHalvaks;
     private int kogus;
+    private static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+
 
     /**
      * Loob uue eseme objekti.
@@ -86,7 +89,7 @@ public class Ese {
      */
     @Override
     public String toString() {
-        return esemeNimetus + " - " + kogus;
+        return esemeNimetus + " - " + kogus + "-" + sdf.format(lähebHalvaks);
     }
 
     /**
