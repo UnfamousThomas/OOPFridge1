@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     public static void main(String[] args) {
         Külmkapp külmkapp;
         System.out.println("Tere tulemast külmkapi haldamise programmi kasutama!");
@@ -90,7 +90,7 @@ public class Main {
             try {
                 külmkapp.salvestaKülmkapp(failiNimi);
 
-                System.exit(1);
+                System.exit(0);
             } catch (IOException e) {
                 e.printStackTrace();
             }

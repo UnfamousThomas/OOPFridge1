@@ -21,7 +21,7 @@ public class Külmkapp {
      */
     private final int külmkapiSuurus;
     private int hetkelAsjuKülmikus;
-    private static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * Konstrueerib külmmkapi.
@@ -203,7 +203,7 @@ public class Külmkapp {
 
 
     public boolean kasOnTühi() {
-        return hetkelAsjuKülmikus <= 0;
+        return hetkelAsjuKülmikus == 0;
     }
 
     /**

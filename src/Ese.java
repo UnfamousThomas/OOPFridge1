@@ -6,7 +6,7 @@ public class Ese {
     private String esemeNimetus;
     private Date lähebHalvaks;
     private int kogus;
-    private static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 
     /**
